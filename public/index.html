@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fff7f4" />
+  <title>Peachy Tasks — My little planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✿</span><span>peachy<span class="brand-light">tasks</span></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" data-filter="all"><span>▦</span> All tasks <span class="nav-count" id="allCount">0</span></button>
+      <button class="nav-item" data-filter="todo"><span>♡</span> To do</button>
+      <button class="nav-item" data-filter="doing"><span>✿</span> In progress</button>
+      <button class="nav-item" data-filter="done"><span>✓</span> Completed</button>
+      <div class="side-label category-label">YOUR SPACE</div>
+      <div class="mini-note"><span class="note-icon">☁</span><div><b>One thing at a time</b><small>Little steps count too.</small></div></div>
+      <div class="sidebar-bottom">
+        <div class="flower-art">✿</div>
+        <p>Make today<br><b>a little lovely.</b></p>
+        <span>♡ you got this ♡</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><div class="eyebrow" id="todayLabel">YOUR PERSONAL SPACE</div><h1>My little planner <span>✿</span></h1><p class="subtitle">A fresh start, one tiny task at a time.</p></div>
+        <div class="top-actions"><div class="date-chip">☀ <span id="dateText"></span></div><div class="avatar">♡</div></div>
+      </header>
+
+      <section class="welcome-card">
+        <div class="welcome-copy"><span class="welcome-tag">A LITTLE REMINDER</span><h2>You’re doing better<br>than you think! <span>🌷</span></h2><p>Stay gentle with yourself. Progress is progress, no matter how small.</p></div>
+        <div class="welcome-illustration" aria-label="Cute flower illustration"><div class="sun"></div><div class="pot">🌼</div><div class="spark s1">✦</div><div class="spark s2">✧</div><div class="spark s3">♡</div></div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card stat-total"><div class="stat-top"><span>Total tasks</span><span class="stat-icon">✿</span></div><strong id="totalStat">0</strong><small>All your little plans</small><div class="stat-decoration">✧</div></article>
+        <article class="stat-card stat-progress"><div class="stat-top"><span>In progress</span><span class="stat-icon">◷</span></div><strong id="doingStat">0</strong><small>Keep the momentum</small><div class="stat-decoration">♡</div></article>
+        <article class="stat-card stat-done"><div class="stat-top"><span>Completed</span><span class="stat-icon">✓</span></div><strong id="doneStat">0</strong><small>Look how far you’ve come</small><div class="stat-decoration">✿</div></article>
+        <article class="stat-card stat-overdue"><div class="stat-top"><span>Overdue</span><span class="stat-icon">!</span></div><strong id="overdueStat">0</strong><small>Give these some love</small><div class="stat-decoration">✧</div></article>
+      </section>
+
+      <section class="tasks-section">
+        <div class="section-heading"><div><span class="eyebrow">YOUR CHECKLIST</span><h2>Tasks for today <span>♡</span></h2></div><button class="primary-btn" id="addTaskBtn"><span>＋</span> Add a task</button></div>
+        <div class="toolbar">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Find a little task..." /></label>
+          <select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option><option>Study</option><option>Work</option><option>Personal</option><option>Shopping</option><option>Health</option></select>
+          <select id="sortFilter" aria-label="Sort tasks"><option value="default">Sort: Priority</option><option value="date">Due date</option><option value="newest">Newest first</option></select>
+        </div>
+        <div class="task-list" id="taskList"><div class="loading">Loading your tasks... ✿</div></div>
+        <div class="empty-state hidden" id="emptyState"><div>🌷</div><h3>Nothing here just yet!</h3><p>Add a task and make your day a little more organized.</p><button class="soft-btn" id="emptyAddBtn">＋ Create your first task</button></div>
+        <div class="list-footer"><span id="taskSummary">0 tasks</span><span>made with <b>♡</b> and a little sunshine</span></div>
+      </section>
+      <footer>PEACHY TASKS <span>·</span> YOUR SOFT SPACE TO GET THINGS DONE</footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modal">
+    <form class="task-modal" id="taskForm">
+      <button type="button" class="close-btn" id="closeModal">×</button>
+      <span class="eyebrow">A NEW LITTLE PLAN</span><h2 id="modalTitle">Create a task <span>✿</span></h2>
+      <input type="hidden" id="taskId">
+      <label>Task name <em>*</em><input id="taskTitle" maxlength="120" placeholder="e.g. Finish my assignment..." required></label>
+      <label>Description <textarea id="taskDescription" rows="3" placeholder="Add a few details (optional)..."></textarea></label>
+      <div class="form-row">
+        <label>Category<select id="taskCategory"><option>Personal</option><option>Study</option><option>Work</option><option>Shopping</option><option>Health</option></select></label>
+        <label>Priority<select id="taskPriority"><option value="low">Low 🌱</option><option value="medium" selected>Medium 🌼</option><option value="high">High 🔥</option></select></label>
+      </div>
+      <div class="form-row">
+        <label>Due date<input id="taskDueDate" type="date"></label>
+        <label>Status<select id="taskStatus"><option value="todo">To do</option><option value="doing">In progress</option><option value="done">Completed</option></select></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="soft-btn" id="cancelModal">Cancel</button><button type="submit" class="primary-btn">Save task <span>♡</span></button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
